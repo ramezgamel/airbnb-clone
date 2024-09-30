@@ -28,7 +28,7 @@ export default function ImageInput({ image }: { image?: string }) {
         {image || preview ? (
           <Image
             className="rounded-full w-28 h-28 border "
-            src={preview || image}
+            src={preview || image || ""}
             width={100}
             height={100}
             alt="image"
