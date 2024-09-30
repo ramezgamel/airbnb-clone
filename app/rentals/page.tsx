@@ -1,3 +1,3 @@
-export default function RentalsPage() {
+export default async function RentalsPage() {
   return <div>RentalsPage</div>;
 }

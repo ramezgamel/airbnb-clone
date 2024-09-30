@@ -12,7 +12,7 @@ import { categories } from "@/utils/categories";
 import { formattedCountries } from "@/utils/countries";
 import React from "react";
 
-export default function createPropertyPage() {
+export default async function createPropertyPage() {
   return (
     <section>
       <h1 className="text-2xl font-semibold mb-8 capitalize">

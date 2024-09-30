@@ -1,3 +1,3 @@
-export default function PropertiesPage() {
+export default async function PropertiesPage() {
   return <div>PropertiesPage</div>;
 }

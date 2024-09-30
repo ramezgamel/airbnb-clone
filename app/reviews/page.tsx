@@ -1,3 +1,3 @@
-export default function ReviewsPage() {
+export default async function ReviewsPage() {
   return <div>ReviewsPage</div>;
 }

@@ -1,3 +1,3 @@
-export default function CheckOutPage() {
+export default async function CheckOutPage() {
   return <div>CheckOutPage</div>;
 }
