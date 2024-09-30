@@ -6,7 +6,7 @@ import {
 import FormContainer from "@/components/form/FormContainer";
 import FormInput from "@/components/form/FormInput";
 import ImageInput from "@/components/form/ImageInput";
-import SubmitButton from "@/components/form/buttons";
+import { SubmitButton } from "@/components/form/buttons";
 
 export default async function ProfilePage() {
   const profile = await getUserProfile();
