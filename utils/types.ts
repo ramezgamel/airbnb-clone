@@ -4,13 +4,13 @@ export type actionFunction = (
 ) => Promise<{ message: string }>;
 
 export type UserType = {
-  id: String;
+  id: string;
   clerkId: String;
-  firstName: String;
-  lastName: String;
-  username: String;
-  email: String;
-  profileImage: String;
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  profileImage: string;
   createdAt: Date;
   updatedAt?: Date;
 };

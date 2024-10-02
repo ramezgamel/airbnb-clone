@@ -145,3 +145,27 @@ export const fetchPropertyDetails = async (id: string) => {
     },
   });
 };
+
+export async function fetchPropertyRating(propertyId: string) {
+  const res = await db.review.groupBy({
+    by: ["propertyId"],
+    _avg: { rating: true },
+    _count: { rating: true },
+    where: {
+      propertyId,
+    },
+  });
+  return {
+    rating: res[0]?._avg.rating?.toFixed() ?? 0,
+    count: res[0]?._count.rating ?? 0,
+  };
+}
+
+export async function isExistingReview(propertyId: string, userId: string) {
+  return await db.review.findFirst({
+    where: {
+      propertyId,
+      profileId: userId,
+    },
+  });
+}

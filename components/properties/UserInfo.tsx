@@ -1,11 +1,14 @@
+import { format, formatDistanceStrict } from "date-fns";
 import Image from "next/image";
 
 export default function UserInfo({
   profileImage,
   firstName,
+  createdAt,
 }: {
   profileImage: string;
   firstName: string;
+  createdAt: Date;
 }) {
   return (
     <article className="grid grid-cols-[auto,1fr] gap-4 mt-4">
@@ -21,7 +24,9 @@ export default function UserInfo({
           Hosted by <span className="font-bold"> {firstName}</span>
         </p>
         <p className="text-muted-foreground font-light">
-          Superhost &middot; 2 years hosting
+          Superhost &middot;{" "}
+          {formatDistanceStrict(createdAt, Date.now(), { addSuffix: true })}{" "}
+          hosting
         </p>
       </div>
     </article>

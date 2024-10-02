@@ -1,4 +1,4 @@
-import { fetchPropertyDetails } from "@/actions/property";
+import { fetchPropertyDetails, isExistingReview } from "@/actions/property";
 import { redirect } from "next/navigation";
 import BreadCrumbs from "@/components/properties/BreadCrumbs";
 import FavoriteToggleButton from "@/components/card/FavoriteToggleButton";
@@ -13,6 +13,9 @@ import Description from "@/components/properties/Describtion";
 import Amenities from "@/components/properties/Amenities";
 import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/ui/skeleton";
+import SubmitReview from "@/components/reviews/SubmitReview";
+import PropertyReviews from "@/components/reviews/PropertyReviews";
+import { auth } from "@clerk/nextjs/server";
 
 const DynamicMap = dynamic(
   () => import("@/components/properties/PropertyMap"),
@@ -29,6 +32,12 @@ export default async function PropertyDetailsPage({
 }) {
   const property = await fetchPropertyDetails(params.id);
   if (!property) redirect("/");
+  const { userId } = auth();
+
+  const isReviewExisting =
+    userId &&
+    userId !== property.profile.clerkId &&
+    (await !isExistingReview(property.id, userId));
   return (
     <section>
       <BreadCrumbs name={property.name} />
@@ -56,6 +65,7 @@ export default async function PropertyDetailsPage({
             <span> {formatQuantity(property.beds, "bed")}</span>
           </p>
           <UserInfo
+            createdAt={property.createdAt}
             profileImage={property.profile.profileImage}
             firstName={property.profile.firstName}
           />
@@ -67,6 +77,10 @@ export default async function PropertyDetailsPage({
         <div className="lg:col-span-4 flex flex-col items-center">
           <BookingCalender />
         </div>
+      </section>
+      <section>
+        {isReviewExisting && <SubmitReview propertyId={property.id} />}
+        <PropertyReviews propertyId={property.id} />
       </section>
     </section>
   );

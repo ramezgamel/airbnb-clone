@@ -57,7 +57,10 @@ export default async function createPropertyPage() {
               )}
             />
           </div>
-          <TextareaInput name="description" />
+          <TextareaInput
+            name="description"
+            defaultValue="Write your rent description."
+          />
 
           <div className="grid sm:grid-cols-2 gap-8 mb-4">
             <FormSelector
