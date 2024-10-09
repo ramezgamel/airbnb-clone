@@ -1,40 +1,39 @@
-import { createPropertyAction } from "@/actions/property";
+import { getRentalDetails, updateProperty } from "@/actions/property";
 import AmenitiesInput from "@/components/form/AmenitiesInput";
+import { SubmitButton } from "@/components/form/buttons";
 import CounterInput from "@/components/form/CounterInput";
 import FormContainer from "@/components/form/FormContainer";
 import FormInput from "@/components/form/FormInput";
 import FormSelector from "@/components/form/FormSelector";
-import ImageInput from "@/components/form/ImageInput";
-import { SubmitButton } from "@/components/form/buttons";
 import TextareaInput from "@/components/form/TextareaInput";
 import { SelectItem } from "@/components/ui/select";
 import { categories } from "@/utils/categories";
 import { formattedCountries } from "@/utils/countries";
-import React from "react";
+import { redirect } from "next/navigation";
 
-export default async function createPropertyPage() {
+export default async function page({ params }: { params: { id: string } }) {
+  const property = await getRentalDetails(params.id);
+  if (!property) redirect("/");
+  const defaultAmenities = JSON.parse(property.amenities);
   return (
     <section>
-      <h1 className="text-2xl font-semibold mb-8 capitalize">
-        create property
-      </h1>
-      <div className="border p-8 rounded">
-        <h3 className="text-lg mb-4 font-medium">General info</h3>
-        <FormContainer action={createPropertyAction}>
-          <ImageInput />
-          <div className="grid md:grid-cols-2 gap-8 mb-4">
+      <h1 className="text-2xl font-semibold mb-4 capitalize">Edit Rental</h1>
+      <div className="border p-8 rounded-md">
+        {/* image edit */}
+        <FormContainer action={updateProperty}>
+          <input type="hidden" name="id" value={property.id} />
+          <div className="grid md:grid-cols-2 gap-8 mt-8 mb-4">
             <FormInput
               name="name"
               type="text"
-              label="Name (30 limit)"
-              defaultValue="Cabin in Egypt"
+              label="Name (20 limit)"
+              defaultValue={property.id}
             />
             <FormInput
               name="tagline"
               type="text"
               label="Tagline (30 limit)"
-              defaultValue="Dream Getaway Awaits You Here"
-              required={true}
+              defaultValue={property.tagline}
             />
             <FormInput
               label="Price ($)"
@@ -76,13 +75,13 @@ export default async function createPropertyPage() {
           <h3 className="text-lg mt-8 mb-4 font-medium">
             Accommodation Details
           </h3>
-          <CounterInput detail="guests" />
-          <CounterInput detail="bedrooms" />
-          <CounterInput detail="beds" />
-          <CounterInput detail="baths" />
+          <CounterInput detail="guests" defaultValue={property.guests} />
+          <CounterInput detail="bedrooms" defaultValue={property.bedrooms} />
+          <CounterInput detail="beds" defaultValue={property.beds} />
+          <CounterInput detail="baths" defaultValue={property.baths} />
           <h3 className="text-lg mt-10 mb-6 font-medium">Amenities</h3>
-          <AmenitiesInput />
-          <SubmitButton text="create rental" className="mt-12" />
+          <AmenitiesInput defaultValue={defaultAmenities} />
+          <SubmitButton text="update rental" className="mt-12" />
         </FormContainer>
       </div>
     </section>

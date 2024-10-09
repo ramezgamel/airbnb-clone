@@ -23,3 +23,8 @@ export type PropertyCardProps = {
   country: string;
   price: number;
 };
+
+export type Booking = {
+  checkIn: Date;
+  checkOut: Date;
+};

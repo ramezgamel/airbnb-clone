@@ -8,6 +8,13 @@ export const getAuthUser = async () => {
   if (!user.privateMetadata.hasProfile) redirect("/profile/create");
   return user;
 };
+export const getAdminUser = async () => {
+  const user = await currentUser();
+  if (!user) throw new Error("Please login first.");
+  if (user.id !== process.env.ADMIN_USER_ID) redirect("/");
+
+  return user;
+};
 
 export const renderError = (error: unknown): { message: string } => {
   console.log("*********\n" + error);

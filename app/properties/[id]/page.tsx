@@ -5,7 +5,6 @@ import FavoriteToggleButton from "@/components/card/FavoriteToggleButton";
 import Image from "next/image";
 import ShareButton from "@/components/properties/ShareButton";
 import PropertyRating from "@/components/card/PropertyRating";
-import BookingCalender from "@/components/properties/BookingCalender";
 import { formatQuantity } from "@/utils/format";
 import UserInfo from "@/components/properties/UserInfo";
 import { Separator } from "@/components/ui/separator";
@@ -23,6 +22,11 @@ const DynamicMap = dynamic(
     ssr: false,
     loading: () => <Skeleton className="h-[400px] w-full" />,
   }
+);
+
+const DynamicBookingWrapper = dynamic(
+  () => import("@/components/booking/BookingWrapper"),
+  { ssr: false, loading: () => <Skeleton className="h-[200px] w-full" /> }
 );
 
 export default async function PropertyDetailsPage({
@@ -75,7 +79,11 @@ export default async function PropertyDetailsPage({
           <DynamicMap countryCode={property.country} />
         </div>
         <div className="lg:col-span-4 flex flex-col items-center">
-          <BookingCalender />
+          <DynamicBookingWrapper
+            propertyId={property.id}
+            price={property.price}
+            bookings={property.bookings}
+          />
         </div>
       </section>
       <section>

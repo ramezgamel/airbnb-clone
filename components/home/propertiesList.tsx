@@ -8,7 +8,7 @@ export default function propertiesList({
   properties: PropertyCardProps[];
 }) {
   return (
-    <section className="mt-4 grid sm:grid-cols-2 gap-8 lg:grid-cols-3  xl:grid-cols-4">
+    <section className="mt-4 grid sm:grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4">
       {properties.map((item) => (
         <PropertyCard key={item.id} property={item} />
       ))}
