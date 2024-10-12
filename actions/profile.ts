@@ -50,7 +50,6 @@ export async function getUserProfile() {
   const profile = await db.profile.findUnique({
     where: { clerkId: user.id },
   });
-  console.log(profile);
 
   if (!profile) redirect("/profile/create");
   return profile;

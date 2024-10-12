@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { LuUploadCloud, LuUser2 } from "react-icons/lu";
 import { IoMdCheckmark } from "react-icons/io";
+import { LuUploadCloud, LuUser2 } from "react-icons/lu";
 
 export default function ImageInput({ image }: { image?: string }) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -22,10 +22,11 @@ export default function ImageInput({ image }: { image?: string }) {
       reader.readAsDataURL(file);
     }
   }
+
   return (
     <div className="mb-2 flex justify-center">
       <div className="relative ">
-        {image || preview ? (
+        {image ? (
           <Image
             className="rounded-full w-28 h-28 border "
             src={preview || image || ""}
@@ -49,7 +50,10 @@ export default function ImageInput({ image }: { image?: string }) {
             name="image"
           />
           {preview ? (
-            <button className="rounded-full  bg-primary p-1">
+            <button
+              onClick={() => setPreview(null)}
+              className="rounded-full  bg-primary p-1"
+            >
               <IoMdCheckmark className="w-5 h-5" />
             </button>
           ) : (
