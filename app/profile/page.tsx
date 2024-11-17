@@ -15,7 +15,7 @@ export default async function ProfilePage() {
       <h1 className="text-center text-2xl capitalize mb-4">User Profile</h1>
 
       <FormContainer action={updateProfileImage}>
-        <ImageInput image={profile.profileImage} />
+        <ImageInput />
       </FormContainer>
 
       <FormContainer action={updateUserProfile}>
