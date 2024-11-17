@@ -9,6 +9,7 @@ import { uploadImage } from "@/utils/supabase";
 import { revalidatePath } from "next/cache";
 import { formatDate } from "@/utils/format";
 import { truncateByDomain } from "recharts/types/util/ChartUtils";
+import { redirect } from "next/navigation";
 
 export const createPropertyAction = async (
   prevState: any,
@@ -37,6 +38,8 @@ export const createPropertyAction = async (
     return { message: "property created" };
   } catch (error) {
     return renderError(error);
+  } finally {
+    redirect("/");
   }
 };
 
