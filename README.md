@@ -33,3 +33,6 @@ The Airbnb Clone project is a web application that simulates the core functional
 - Node.js (v14 or higher)
 - npm or yarn
 
+![Screenshot_17-11-2024_135340_airbnb-clone-rose-psi-61 vercel app](https://github.com/user-attachments/assets/84d6d0c6-fb85-402b-ad48-8b44ad3a49dc)![image](https://github.com/user-attachments/assets/0b8debb8-cf92-425d-8295-536f4665f932)
+
+
